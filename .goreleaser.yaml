@@ -11,12 +11,12 @@ before:
 universal_binaries:
   - replace: false
 
-archives:
-  - id: default
-    wrap_in_directory: true
-  - format_overrides:
-      - goos: windows
-        format: zip
+# archives:
+#   - id: default
+#     wrap_in_directory: true
+#   - format_overrides:
+#       - goos: windows
+#         format: zip
 
 builds:
   - main: ./cmd/laravel-make
@@ -24,7 +24,6 @@ builds:
     flags:
       - -trimpath
 
-    # Default is `-s -w -X main.version={{.Version}} -X main.commit={{.Commit}} -X main.date={{.Date}} -X main.builtBy=goreleaser`.
     ldflags:
       - -s -w -X main.build={{.Version}} -X main.commit={{.Commit}} -X main.date={{.Date}}
 
