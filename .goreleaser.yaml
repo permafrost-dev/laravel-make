@@ -6,6 +6,7 @@ before:
   hooks:
     - sh -c "$(curl --location https://taskfile.dev/install.sh)" -- -d
     - go mod tidy
+    - task update-version-file
 
 universal_binaries:
   - replace: false
@@ -36,16 +37,16 @@ builds:
       - amd64
       - arm64
 
-brews:
-  -
-    name: 'laravel-make'
-    homepage: 'https://github.com/permafrost-dev/laravel-make'
-    description: 'Scaffold a new Laravel project'
-    license: "MIT"
-    tap:
-      owner: 'permafrost-dev'
-      name: homebrew-laravel-make
-      branch: main
+# brews:
+#   -
+#     name: 'laravel-make'
+#     homepage: 'https://github.com/permafrost-dev/laravel-make'
+#     description: 'Scaffold a new Laravel project'
+#     license: "MIT"
+#     tap:
+#       owner: 'permafrost-dev'
+#       name: homebrew-laravel-make
+#       branch: main
 
 signs:
   - artifacts: checksum
