@@ -4,7 +4,7 @@ env:
 
 before:
   hooks:
-    - sh -c "$(curl --location https://taskfile.dev/install.sh)" -- -d
+    # - sh -c "$(curl --location https://taskfile.dev/install.sh)" -- -d
     - go mod tidy
     - task update-version-file
 
@@ -12,8 +12,7 @@ universal_binaries:
   - replace: false
 
 # archives:
-#   - id: default
-#     wrap_in_directory: true
+#   - wrap_in_directory: true
 #   - format_overrides:
 #       - goos: windows
 #         format: zip
