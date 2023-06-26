@@ -71,20 +71,14 @@ func createDockerComposeFile() error {
 }
 
 func updateDotEnvFile() error {
-	// read file content, replace a string, and write it back to file
-
-	// open file
 	f, err := os.Open(".env")
-
 	if err != nil {
 		return err
 	}
 
 	defer f.Close()
 
-	// read file content
 	b, err := io.ReadAll(f)
-
 	if err != nil {
 		return err
 	}
@@ -94,7 +88,6 @@ func updateDotEnvFile() error {
 	content = strings.ReplaceAll(content, "QUEUE_CONNECTION=sync", "QUEUE_CONNECTION=redis")
 
 	fw, err := os.Create(".env")
-
 	if err != nil {
 		return err
 	}
