@@ -30,8 +30,8 @@ builds:
       - amd64
       - arm64
 
-signs:
-  - artifacts: checksum
+# signs:
+#   - artifacts: checksum
 
 checksum:
   name_template: "checksums.txt"
