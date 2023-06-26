@@ -3,14 +3,14 @@ GOVARS = -X main.Version=$(VERSION)
 SYSTEM = ${GOOS}_${GOARCH}
 
 build:
-	rm dist/{{project.name}}
-	go build -trimpath -ldflags "-s -w -X main.Version=0.1.5-dev" -o dist ./cmd/{{project.name}}
+	rm dist/laravel-make
+	go build -trimpath -ldflags "-s -w -X main.Version=0.1.5-dev" -o dist ./cmd/laravel-make
 
 build-dist:
-	go build -trimpath -ldflags "-s -w $(GOVARS)" -o build/bin/{{project.name}}-$(VERSION)-$(SYSTEM) ./cmd/{{project.name}}
+	go build -trimpath -ldflags "-s -w $(GOVARS)" -o build/bin/laravel-make-$(VERSION)-$(SYSTEM) ./cmd/laravel-make
 
-{{project.name}}:
-	go build -trimpath -ldflags "-s -w $(GOVARS)" -o dist ./cmd/{{project.name}}
+laravel-make:
+	go build -trimpath -ldflags "-s -w $(GOVARS)" -o dist ./cmd/laravel-make
 
 build-dist-all:
 	go run tools/build-all.go
@@ -22,20 +22,20 @@ package-setup:
 
 package: build-dist package-setup
 
-	mkdir -p build/{{project.name}}-$(VERSION)-$(SYSTEM);\
-	cp README.md build/{{project.name}}-$(VERSION)-$(SYSTEM)
+	mkdir -p build/laravel-make-$(VERSION)-$(SYSTEM);\
+	cp README.md build/laravel-make-$(VERSION)-$(SYSTEM)
 	if [ "${GOOS}" = "windows" ]; then\
-		cp build/bin/{{project.name}}-$(VERSION)-$(SYSTEM) build/{{project.name}}-$(VERSION)-$(SYSTEM)/{{project.name}}.exe;\
+		cp build/bin/laravel-make-$(VERSION)-$(SYSTEM) build/laravel-make-$(VERSION)-$(SYSTEM)/laravel-make.exe;\
 		cd build;\
-		zip -r -q -T archives/{{project.name}}-$(VERSION)-$(SYSTEM).zip {{project.name}}-$(VERSION)-$(SYSTEM);\
+		zip -r -q -T archives/laravel-make-$(VERSION)-$(SYSTEM).zip laravel-make-$(VERSION)-$(SYSTEM);\
 	else\
-		cp build/bin/{{project.name}}-$(VERSION)-$(SYSTEM) build/{{project.name}}-$(VERSION)-$(SYSTEM)/{{project.name}};\
+		cp build/bin/laravel-make-$(VERSION)-$(SYSTEM) build/laravel-make-$(VERSION)-$(SYSTEM)/laravel-make;\
 		cd build;\
-		tar -czf archives/{{project.name}}-$(VERSION)-$(SYSTEM).tar.gz {{project.name}}-$(VERSION)-$(SYSTEM);\
+		tar -czf archives/laravel-make-$(VERSION)-$(SYSTEM).tar.gz laravel-make-$(VERSION)-$(SYSTEM);\
 	fi
 
 clean:
 	rm -rf build
 
 lint:
-	golangci-lint run cmd/{{project.name}}
+	golangci-lint run cmd/laravel-make

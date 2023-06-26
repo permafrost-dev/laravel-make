@@ -18,8 +18,8 @@ archives:
         format: zip
 
 builds:
-  - main: ./cmd/{{project.name}}
-    binary: '{{project.name}}'
+  - main: ./cmd/laravel-make
+    binary: 'laravel-make'
     flags:
       - -trimpath
 
@@ -38,13 +38,13 @@ builds:
 
 brews:
   -
-    name: '{{project.name}}'
-    homepage: 'https://github.com/{{project.vendor.github}}/{{project.name}}'
-    description: '{{project.description}}'
+    name: 'laravel-make'
+    homepage: 'https://github.com/permafrost-dev/laravel-make'
+    description: 'Scaffold a new Laravel project'
     license: "MIT"
     tap:
-      owner: '{{project.vendor.github}}'
-      name: homebrew-{{project.name}}
+      owner: 'permafrost-dev'
+      name: homebrew-laravel-make
       branch: main
 
 signs:

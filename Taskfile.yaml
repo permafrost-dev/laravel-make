@@ -17,39 +17,39 @@ tasks:
 
   build:
     cmds:
-      - task: build-{{project.name}}
+      - task: build-laravel-make
 
   clean:
     desc: Cleans up build artifacts
     cmds:
-      - rm -f ./dist/{{project.name}}
+      - rm -f ./dist/laravel-make
     status:
-      - test -f ./dist/{{project.name}}
+      - test -f ./dist/laravel-make
 
   lint:
     cmds:
-      - task: lint-{{project.name}}
+      - task: lint-laravel-make
 
   update-version-file:
     cmds:
-      - printf "package main\n\nvar Version = \"{{.VERSION}}\"" > ./cmd/{{project.name}}/version.go
+      - printf "package main\n\nvar Version = \"{{.VERSION}}\"" > ./cmd/laravel-make/version.go
     status:
-      - test -f ./cmd/{{project.name}}/version.go
-      - grep -q "\"{{.VERSION}}\"" ./cmd/{{project.name}}/version.go
+      - test -f ./cmd/laravel-make/version.go
+      - grep -q "\"{{.VERSION}}\"" ./cmd/laravel-make/version.go
 
-  lint-{{project.name}}:
+  lint-laravel-make:
     desc: Runs golangci-lint
     cmds:
       - golangci-lint run ./cmd/**
 
-  build-{{project.name}}:
-    desc: Builds {{project.name}} binary
+  build-laravel-make:
+    desc: Builds laravel-make binary
     deps:
       - task: update-version-file
     sources:
-      - './cmd/{{project.name}}/**/*.go'
+      - './cmd/laravel-make/**/*.go'
     generates:
-      - ./dist/{{project.name}}
+      - ./dist/laravel-make
     cmds:
       - mkdir -p ./dist
-      - go build -trimpath -ldflags="-s -w -X main.Version={{.VERSION}}-{{.GIT_COMMIT}}" -o dist ./cmd/{{project.name}}
+      - go build -trimpath -ldflags="-s -w -X main.Version={{.VERSION}}-{{.GIT_COMMIT}}" -o dist ./cmd/laravel-make

@@ -1,4 +1,4 @@
-module github.com/project-vendor-github/project-name
+module github.com/permafrost-dev/laravel-make
 
 go 1.19
 
