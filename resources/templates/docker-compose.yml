@@ -1,0 +1,39 @@
+version: '3'
+
+services:
+    mysql:
+        image: docker.io/mariadb:11
+        container_name: {{project.name}}-mysql
+        environment:
+            MYSQL_ROOT_PASSWORD: '${DB_PASSWORD}'
+            MYSQL_DATABASE: '${DB_DATABASE}'
+            MYSQL_USER: '${DB_USERNAME}'
+            MYSQL_PASSWORD: '${DB_PASSWORD}'
+            MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
+        volumes:
+            - '{{project.name}}mysql:/var/lib/mysql'
+        ports:
+            - '${FORWARD_DB_PORT:-3306}:3306'
+        networks:
+            - {{project.name}}net
+        command: '--default-authentication-plugin=mysql_native_password --thread_handling=pool-of-threads --thread-pool-size=128 --thread-pool-dedicated-listener=1 --thread-pool-priority=high  --thread-pool-stall-limit=5'
+        restart: always
+        healthcheck:
+            test: ['CMD', 'mysqladmin', 'ping']
+        expose:
+            - 3306
+            - 33060
+
+    redis:
+        image: docker.io/redis:alpine
+        container_name: {{project.name}}-redis
+        ports:
+            - 6379:6379
+        networks:
+            - {{project.name}}net
+
+networks:
+    {{project.name}}net:
+
+volumes:
+    {{project.name}}mysql:
