@@ -122,9 +122,7 @@ func main() {
 		os.Exit(1)
 	}
 
-	err := os.Chdir(os.Args[1])
-
-	if err != nil {
+	if err := os.Chdir(os.Args[1]); err != nil {
 		fmt.Println(err)
 		os.Exit(1)
 	}
