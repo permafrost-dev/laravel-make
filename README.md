@@ -2,16 +2,20 @@
 
 ---
 
+Scaffolds a new Laravel project using `laravel new`, creates a `docker-compose.yml` file with services for 
+the database (MariaDB) and Redis, then updates the `.env` file to use `redis` as a queue driver instead of the default.
 
+## Usage
 
-Scaffold a new Laravel project
+```bash
+laravel-make <project-name>
+```
 
 ## Setup
 
 ```bash
 go mod tidy
 ```
-
 
 ## Building the project
 
