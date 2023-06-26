@@ -19,6 +19,8 @@ go mod tidy
 
 ## Building the project
 
+`laravel-make` uses `task` to manage tasks such as builds.  See the [task project page](https://github.com/go-task/task) for more information.
+
 ```bash
 task build
 ```

@@ -107,6 +107,11 @@ func main() {
 		os.Exit(1)
 	}
 
+	if os.Args[1] == "--version" {
+		fmt.Println("laravel-make version " + Version)
+		os.Exit(0)
+	}
+
 	cmd := exec.Command("laravel", "new", os.Args[1])
 
 	cmd.Stdout = os.Stdout
@@ -117,7 +122,12 @@ func main() {
 		os.Exit(1)
 	}
 
-	os.Chdir(os.Args[1])
+	err := os.Chdir(os.Args[1])
+
+	if err != nil {
+		fmt.Println(err)
+		os.Exit(1)
+	}
 
 	if err := createDockerComposeFile(); err != nil {
 		fmt.Println(err)
