@@ -4,47 +4,31 @@ env:
 
 before:
   hooks:
-    # - sh -c "$(curl --location https://taskfile.dev/install.sh)" -- -d
     - go mod tidy
     - task update-version-file
 
 universal_binaries:
   - replace: false
 
-# archives:
-#   - wrap_in_directory: true
-#   - format_overrides:
-#       - goos: windows
-#         format: zip
+archives:
+  - format_overrides:
+      - goos: windows
+        format: zip
 
 builds:
   - main: ./cmd/laravel-make
     binary: 'laravel-make'
     flags:
       - -trimpath
-
     ldflags:
       - -s -w -X main.build={{.Version}} -X main.commit={{.Commit}} -X main.date={{.Date}}
-
     goos:
       - darwin
       - linux
       - windows
-
     goarch:
       - amd64
       - arm64
-
-# brews:
-#   -
-#     name: 'laravel-make'
-#     homepage: 'https://github.com/permafrost-dev/laravel-make'
-#     description: 'Scaffold a new Laravel project'
-#     license: "MIT"
-#     tap:
-#       owner: 'permafrost-dev'
-#       name: homebrew-laravel-make
-#       branch: main
 
 signs:
   - artifacts: checksum
