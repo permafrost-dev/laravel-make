@@ -23,7 +23,7 @@ jobs:
     steps:
 
       - name: Install Task
-        uses: arduino/setup-task@v1
+        uses: arduino/setup-task@v2
 
       - name: Install Go
         uses: WillAbides/setup-go-faster@v1.14.0
